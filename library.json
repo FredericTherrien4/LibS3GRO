@@ -11,9 +11,10 @@
     ],
     "dependencies":
     [
-      	{"name": "Adafruit INA219"},
-	{"name": "SoftwareSerial"},
-	{"name": "ArduinoJson"}
+      {"name": "Adafruit INA219"},
+	    {"name": "SoftwareSerial"},
+      {"name": "ArduinoJson"},
+      {"name": "Grove IMU 9DOF"}
     ],
     "version": "1.0.5"
   }

@@ -8,11 +8,11 @@ General librairies for S3
 #define LibS3GRO_H_
 
 // Includes
-  #include <ArduinoX/ArduinoX.h>
-  #include <VexQuadEncoder/VexQuadEncoder.h>
-  #include <SoftTimer/SoftTimer.h>
-  #include <MegaServo/MegaServo.h>
-
+#include <ArduinoX/ArduinoX.h>
+#include <VexQuadEncoder/VexQuadEncoder.h>
+#include <SoftTimer/SoftTimer.h>
+#include <MegaServo/MegaServo.h>
+#include <IMU9DOF/IMU9DOF.h>
 
 template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg); return obj; }
 #define endl "\r\n"
