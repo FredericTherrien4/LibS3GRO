@@ -38,6 +38,5 @@ double IMU9DOF::getGyroZ(){
 }
 
 double IMU9DOF::getTemp(){
-    double temp = 
     return (double) imu_.getTemperature() /340 + 36.53;
 }
