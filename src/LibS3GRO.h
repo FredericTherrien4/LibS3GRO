@@ -13,6 +13,7 @@ General librairies for S3
 #include <SoftTimer/SoftTimer.h>
 #include <MegaServo/MegaServo.h>
 #include <IMU9DOF/IMU9DOF.h>
+#include <PID/PID.h>
 
 template<class T> inline Print &operator <<(Print &obj, T arg) { obj.print(arg); return obj; }
 #define endl "\r\n"

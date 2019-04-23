@@ -13,8 +13,8 @@ Class to interface some of the ArduinoX "on board" functionnalities
 #include <MotorControl/MotorControl.h>
 #include <LS7366Counter/LS7366Counter.h>
 
-#define LEFT 0
-#define RIGHT 1
+// #define LEFT 1
+// #define RIGHT 0
 class ArduinoX
 {
   public:
@@ -108,10 +108,10 @@ class ArduinoX
   private:
     const uint8_t LOWBAT_PIN =  12;
     const uint8_t BUZZER_PIN =  36;
-    const uint8_t MOTOR_PWM_PIN[2] =  {6, 5};
-    const uint8_t MOTOR_DIR_PIN[2] =  {31, 30};
-    const uint8_t COUNTER_SLAVE_PIN[2] =  {35, 34};
-    const uint8_t COUNTER_FLAG_PIN[2] =  {A15, A14};
+    const uint8_t MOTOR_PWM_PIN[2] =  {5, 6};
+    const uint8_t MOTOR_DIR_PIN[2] =  {30, 31};
+    const uint8_t COUNTER_SLAVE_PIN[2] =  {34, 35};
+    const uint8_t COUNTER_FLAG_PIN[2] =  {A14, A15};
     Adafruit_INA219 ina219;
     MotorControl __motor__[2];
     LS7366Counter __encoder__[2];
