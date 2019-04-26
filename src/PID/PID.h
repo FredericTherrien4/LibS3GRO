@@ -80,7 +80,10 @@ class PID
     @param period
     Time period between iterations in ms
     */
-    void setPeriod(unsigned long period){dt_ = period;};
+    void setPeriod(unsigned long period){
+    dtMs_ = period; 
+    dt_=period/1000.0;
+    };
 
     /** Method to set goal attribute
     @param goal
@@ -154,8 +157,9 @@ class PID
     double goal_ = 0; // Desired state
     bool enable_ = false; // Enable flag
     bool atGoal_ = false; // Flag to know if at goal 
-
-    unsigned long dt_; // Periode between commands
+    
+    double dt_;
+    unsigned long dtMs_; // Periode between commands
     unsigned long actualDt_; // Actual periode between last command
     unsigned long measureTime_ = 0; // Time for next iteration 
 

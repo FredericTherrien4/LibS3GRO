@@ -22,7 +22,7 @@ void PID::enable(){
     // if function pointers are initiated
     if(measurementFunc_!=nullptr && commandFunc_!=nullptr){
         enable_ = true;
-        measureTime_ = millis() + dt_;
+        measureTime_ = millis() + dtMs_;
         atGoal_ = false;
         eIntegral_ = 0;
         ePrevious = 0;
@@ -41,7 +41,7 @@ void PID::run(){
     if(millis() >= measureTime_ && enable_){
 
         //actualDt_ = millis() - measureTime_;
-        measureTime_ = millis() + dt_;
+        measureTime_ = millis() + dtMs_;
         double error = goal_ - measurementFunc_();
         
         // if goal reached
