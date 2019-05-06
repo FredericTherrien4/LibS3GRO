@@ -55,14 +55,14 @@ void PID::run(){
         }else{
             commandFunc_(computeCommand(error));
         }
-        
-        
+       lastMeasureTime_ =  measureTime_;
     }
+
 }
 
 double PID::computeCommand(double error){
     double CMD;
-
+    actualDt_ = millis() - lastMeasureTime_;
     eIntegral_ += error;
     
     // Integral saturation
@@ -73,7 +73,7 @@ double PID::computeCommand(double error){
         eIntegral_ = -eIntegralLim_;
     }
 
-    CMD = Kp_*error + Ki_*eIntegral_*dt_ + Kd_*(error-ePrevious)/dt_;
+    CMD = Kp_*error + Ki_*eIntegral_*actualDt_ + Kd_*(error-ePrevious)/actualDt_;
 
     ePrevious = error;
     return CMD;

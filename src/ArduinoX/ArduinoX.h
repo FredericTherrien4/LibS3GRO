@@ -9,9 +9,10 @@ Class to interface some of the ArduinoX "on board" functionnalities
 #define ArduinoX_H_
 
 #include <Arduino.h>
-#include <Adafruit_INA219.h> // For power usage statistics
-#include <MotorControl/MotorControl.h>
-#include <LS7366Counter/LS7366Counter.h>
+#include <Adafruit_INA219.h>            // For power usage statistics
+#include <MotorControl/MotorControl.h>  // To control DC motors
+#include <LS7366Counter/LS7366Counter.h>// To access DC motor encoders
+#include <DAC2629/DAC2629.h>            // To acces DAC
 
 // #define LEFT 1
 // #define RIGHT 0
@@ -69,7 +70,7 @@ class ArduinoX
     */
     bool isLowBat();
 
-    /** Method to set speed (direction and pwm) to a motor drive
+    /** Method to set PWM (direction and pwm) to a motor drive
     
     @param id
     identification of motor [0,1]
@@ -77,7 +78,7 @@ class ArduinoX
     @param speed
     speed to send to the drive [-1.0, 1.0]
     */
-    void setSpeedMotor(uint8_t id, float speed);
+    void setMotorPWM(uint8_t id, float PWM);
 
     /** Method read the count of pulses from a quadrature encoder
     
@@ -105,6 +106,22 @@ class ArduinoX
     */
     void resetEncoder(uint8_t id);
 
+    /** Method to set output of a DAC submodule
+    
+    @param id
+    identification of DAC submodule [0,3]
+    
+    @param voltage
+    */
+    void setDAC(uint8_t id, double voltage);
+
+    /** Method to calibrate DAC
+    
+    @param maxVolt
+    maximum read in Volts when offset is set to 5.0
+    */
+    void setMaxVoltageDAC(double offset);
+
   private:
     const uint8_t LOWBAT_PIN =  12;
     const uint8_t BUZZER_PIN =  36;
@@ -113,8 +130,9 @@ class ArduinoX
     const uint8_t COUNTER_SLAVE_PIN[2] =  {34, 35};
     const uint8_t COUNTER_FLAG_PIN[2] =  {A14, A15};
     Adafruit_INA219 ina219;
-    MotorControl __motor__[2];
-    LS7366Counter __encoder__[2];
+    MotorControl motor_[2];
+    LS7366Counter encoder_[2];
+    DAC2629 dac_;
 
 };
 #endif //ArduinoX

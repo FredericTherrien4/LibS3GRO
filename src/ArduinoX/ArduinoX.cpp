@@ -13,8 +13,8 @@ void ArduinoX::init(){
   pinMode(LOWBAT_PIN, INPUT);
   ina219.begin();
   for(uint8_t id = 0; id < 2; id++){
-    __motor__[id].init(MOTOR_PWM_PIN[id], MOTOR_DIR_PIN[id]);
-    __encoder__[id].init(COUNTER_SLAVE_PIN[id], COUNTER_FLAG_PIN[id]);
+    motor_[id].init(MOTOR_PWM_PIN[id], MOTOR_DIR_PIN[id]);
+    encoder_[id].init(COUNTER_SLAVE_PIN[id], COUNTER_FLAG_PIN[id]);
   }
 }
 
@@ -54,15 +54,15 @@ bool ArduinoX::isLowBat(){
   return !digitalRead(LOWBAT_PIN);
 }
 
-void ArduinoX::setSpeedMotor(uint8_t id, float speed){
+void ArduinoX::setMotorPWM(uint8_t id, float PWM){
   if(id<0 || id>1){
     Serial.println("Invalid motor id!");
     return;
   }
   if(id==1){
-    speed *= -1; // left motor is inverted
+    PWM *= -1; // left motor is inverted
   }
-  __motor__[id].setSpeed(speed);
+  motor_[id].setSpeed(PWM);
 }
 
 int32_t ArduinoX::readEncoder(uint8_t id){
@@ -71,9 +71,9 @@ int32_t ArduinoX::readEncoder(uint8_t id){
     return 0;
   }
   if(id == 0){
-    return -__encoder__[id].read();// Left motor is inverted
+    return -encoder_[id].read();// Left motor is inverted
   }else{
-    return __encoder__[id].read();
+    return encoder_[id].read();
   }
 }
 
@@ -83,9 +83,9 @@ int32_t ArduinoX::readResetEncoder(uint8_t id){
     return 0;
   }
   if(id){
-    return -__encoder__[id].readReset();// Left motor is inverted
+    return -encoder_[id].readReset();// Left motor is inverted
   }else{
-    return __encoder__[id].readReset();
+    return encoder_[id].readReset();
   }
 }
 
@@ -94,5 +94,13 @@ void ArduinoX::resetEncoder(uint8_t id){
     Serial.println("Invalid encoder id!");
     return;
   }
-  __encoder__[id].reset();// Reset counter
+  encoder_[id].reset();// Reset counter
+}
+
+void ArduinoX::setDAC(uint8_t id, double voltage){
+  dac_.ouput(id,voltage);
+}
+
+void ArduinoX::setMaxVoltageDAC(double offset){
+  dac_.setMaxVoltage(offset);
 }

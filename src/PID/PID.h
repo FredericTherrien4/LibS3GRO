@@ -117,7 +117,7 @@ class PID
     @param lim
     limit cumulative error
     */
-    void setIntegralLim_(double lim){eIntegralLim_ = lim;};
+    void setIntegralLim(double lim){eIntegralLim_ = lim;};
 
     /** Method to set epsilon
     @param eps
@@ -136,6 +136,11 @@ class PID
     @return current goal
     */
     double getGoal(){return goal_;}
+
+    /** Method to get the actual delta time
+    @return actualDt_
+    */
+    double getActualDt(){return actualDt_;}
 
   private:
     /** Method to compute the command
@@ -158,10 +163,12 @@ class PID
     bool enable_ = false; // Enable flag
     bool atGoal_ = false; // Flag to know if at goal 
     
-    double dt_;
+    double dt_; // Theoric time between 2 measurments
     unsigned long dtMs_; // Periode between commands
     unsigned long actualDt_; // Actual periode between last command
     unsigned long measureTime_ = 0; // Time for next iteration 
+    unsigned long lastMeasureTime_ = 0; // Time of last iteration 
+
 
 
     double epsilon_ = 5;
