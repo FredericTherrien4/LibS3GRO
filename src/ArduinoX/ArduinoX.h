@@ -118,9 +118,9 @@ class ArduinoX
     /** Method to calibrate DAC
     
     @param maxVolt
-    maximum read in Volts when offset is set to 5.0
+    maximum read voltage in Volts when offset is set to 5.0
     */
-    void setMaxVoltageDAC(double offset);
+    void calibrateDAC(double offset);
 
   private:
     const uint8_t LOWBAT_PIN =  12;

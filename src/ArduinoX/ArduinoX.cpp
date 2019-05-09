@@ -101,6 +101,6 @@ void ArduinoX::setDAC(uint8_t id, double voltage){
   dac_.ouput(id,voltage);
 }
 
-void ArduinoX::setMaxVoltageDAC(double offset){
+void ArduinoX::calibrateDAC(double offset){
   dac_.setMaxVoltage(offset);
 }
