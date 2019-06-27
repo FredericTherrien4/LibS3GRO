@@ -73,7 +73,7 @@ double PID::computeCommand(double error){
         eIntegral_ = -eIntegralLim_;
     }
 
-    CMD = Kp_*error + Ki_*eIntegral_*actualDt_ + Kd_*(error-ePrevious)/actualDt_;
+    CMD = Kp_*error + Ki_*eIntegral_*dt_ + Kd_*(error-ePrevious)/dt_;
 
     ePrevious = error;
     return CMD;
