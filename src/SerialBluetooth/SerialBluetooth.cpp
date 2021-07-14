@@ -10,13 +10,13 @@ Class to communicate with Sunfounder Bluetooth module
 void SerialBluetooth::init(HardwareSerial& serialCon){
   stream_ptr = &serialCon;
   serialCon.begin(BAUD_RATE_BLUETOOTH);
-  while(!serialCon); // Attente d'ouverture du port serie
+  while(!serialCon.available()); // Attente d'ouverture du port serie
 }
 
 void SerialBluetooth::init(SoftwareSerial& serialCon){
   stream_ptr = &serialCon;
   serialCon.begin(BAUD_RATE_BLUETOOTH);
-  while(!serialCon); // Attente d'ouverture du port serie
+  while(!serialCon.available()); // Attente d'ouverture du port serie
 }
 
 bool SerialBluetooth::read(String& msg){
